@@ -1,0 +1,32 @@
+{
+  "name": "The Desk — CAT 2026 Secretary",
+  "short_name": "The Desk",
+  "description": "Your second brain for CAT 2026 — a gap-filling study planner that schedules itself.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0E1218",
+  "theme_color": "#0E1218",
+  "categories": ["productivity", "education"],
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
