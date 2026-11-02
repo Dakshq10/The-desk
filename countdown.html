@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0A0C11">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+<title>Countdown — The Desk</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap');
+:root{
+  --bg:#0A0C11;--bg2:#0F131A;--surf:#141A23;--surf2:#1C232F;
+  --line:rgba(255,255,255,.06);--line2:rgba(255,255,255,.12);
+  --tx:#E9EDF3;--mut:#8A96A7;--dim:#566274;
+  --amber:#8B7CFF;--amber-d:#2f2c66;--teal:#33D6A6;--teal-d:#134a3c;
+  --coral:#FB6F84;--violet:#F06CB0;
+  --gold:#F3B13C;--gold-d:#4a3913;--cyan:#2FCBDB;--cyan-d:#123b41;--sky:#5AA6FF;--sky-d:#1c3a62;
+  --r:13px;--rs:9px;
+  --disp:'Space Grotesk',system-ui,sans-serif;--body:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+html{scroll-padding-top:calc(150px + env(safe-area-inset-top,0px))}
+body{background:var(--bg);color:var(--tx);font-family:var(--body);font-size:14px;line-height:1.45;-webkit-font-smoothing:antialiased;padding-bottom:calc(40px + env(safe-area-inset-bottom,0px))}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px;border-radius:6px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.top{position:sticky;top:0;z-index:30;background:var(--bg);padding:calc(12px + env(safe-area-inset-top,0px)) 16px 0}
+.topin{max-width:680px;margin:0 auto;display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
+.brand .k{font-family:var(--disp);font-weight:700;font-size:18px;letter-spacing:-.01em;line-height:1}.brand .k b{color:var(--amber)}
+.brand a{font-size:11px;color:var(--mut);text-decoration:none;display:inline-block;margin-top:5px}
+.brand a:hover{color:var(--tx)}
+.cd{text-align:right;line-height:1}.cd .n{font-family:var(--mono);font-weight:700;font-size:26px;color:var(--amber);letter-spacing:-.02em}
+.cd .l{font-size:11px;color:var(--mut);margin-top:3px}
+.strip{max-width:680px;margin:10px auto 0;display:flex;gap:6px;overflow-x:auto;padding:2px 0 10px;scrollbar-width:none}
+.strip::-webkit-scrollbar{display:none}
+.chipd{flex:0 0 auto;width:46px;padding:7px 0 6px;border-radius:10px;border:1px solid var(--line);background:var(--surf);text-align:center;position:relative}
+.chipd .w{font-size:10px;color:var(--dim);font-weight:600}
+.chipd .d{font-family:var(--mono);font-weight:700;font-size:15px;margin-top:1px}
+.chipd .k{height:3px;border-radius:3px;margin:5px 9px 0;background:var(--surf2);overflow:hidden}
+.chipd .k i{display:block;height:100%;background:var(--teal)}
+.chipd.mock{border-color:var(--amber-d)}.chipd.mock .d{color:#b9afff}
+.chipd.exam{border-color:var(--coral)}.chipd.exam .d{color:var(--coral)}
+.chipd.today::after{content:"";position:absolute;top:4px;right:5px;width:5px;height:5px;border-radius:50%;background:var(--teal)}
+.chipd.sel{background:var(--surf2);border-color:var(--amber)}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px}
+.hero{margin-top:14px;background:linear-gradient(140deg,#191c2e,#12141d);border:1px solid var(--line2);border-radius:16px;padding:16px}
+.hero .kind{display:inline-block;font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;background:var(--surf2);color:var(--mut)}
+.hero .kind.mock{background:var(--amber-d);color:#cfc8ff}.hero .kind.fix{background:var(--teal-d);color:#aef0db}
+.hero .kind.work{background:var(--sky-d);color:#bcd6ff}.hero .kind.exam{background:#5e2430;color:#ffc4cf}
+.hero h1{font-family:var(--disp);font-weight:600;font-size:23px;line-height:1.15;margin:10px 0 4px;letter-spacing:-.01em}
+.hero .date{font-size:12.5px;color:var(--mut)}
+.hero .focus{margin-top:11px;padding:10px 12px;background:rgba(0,0,0,.24);border-radius:var(--rs);border:1px solid var(--line);font-size:13px;color:#ccd3de}
+.hero .qa{margin-top:8px;font-size:12.5px;color:var(--mut)}.hero .qa b{color:#ffd98a;font-weight:600}
+.prog{display:flex;align-items:center;gap:10px;margin-top:12px}
+.bar{flex:1;height:6px;border-radius:6px;background:var(--surf2);overflow:hidden}.bar i{display:block;height:100%;background:var(--teal);transition:width .2s}
+.prog .t{font-family:var(--mono);font-size:12px;color:var(--mut)}
+.navd{display:flex;justify-content:space-between;gap:8px;margin:12px 0 4px}
+.btn{background:var(--surf2);color:var(--tx);border:1px solid var(--line2);font-weight:600;border-radius:9px;padding:8px 13px;font-size:13px}
+.btn:active{transform:scale(.97)}
+.btn.today{color:var(--teal)}
+.slots{margin-top:8px}
+.slot{display:flex;gap:11px}
+.slot .rail{width:58px;flex:0 0 auto;text-align:right;padding-top:13px}
+.slot .rail .t{font-family:var(--mono);font-size:11px;color:var(--dim);line-height:1.3}
+.slot .body{flex:1;min-width:0;border-left:2px solid var(--line);padding:0 0 11px 13px;position:relative}
+.slot .body::before{content:"";position:absolute;left:-6px;top:15px;width:9px;height:9px;border-radius:50%;background:var(--dim);border:2px solid var(--bg)}
+.slot.mock .body::before{background:var(--amber)}.slot.qa .body::before{background:var(--gold)}
+.slot.lrdi .body::before{background:var(--cyan)}.slot.varc .body::before{background:var(--sky)}
+.slot.review .body::before{background:var(--teal)}.slot.prep .body::before{background:var(--mut)}
+.slot.done .body::before{background:var(--teal);box-shadow:0 0 0 3px rgba(51,214,166,.18)}
+.ev{background:var(--surf);border:1px solid var(--line);border-radius:var(--rs);padding:10px 11px;margin-top:6px}
+.slot.done .ev{opacity:.55}
+.evh{display:flex;align-items:flex-start;gap:10px}
+.chk{width:24px;height:24px;border-radius:7px;border:1.5px solid var(--line2);flex:0 0 auto;display:grid;place-items:center;color:transparent;font-size:14px;font-weight:700}
+.chk.on{background:var(--teal);border-color:var(--teal);color:#052018}
+.evh .grow{flex:1;min-width:0;text-align:left}
+.tag{font-size:10.5px;font-weight:600;color:var(--dim)}
+.slot.mock .tag{color:#b9afff}.slot.qa .tag{color:#ffd98a}.slot.lrdi .tag{color:#9ff0f6}.slot.varc .tag{color:#bcd6ff}.slot.review .tag{color:#aef0db}
+.ttl{font-weight:600;font-size:14px;margin-top:1px}.slot.done .ttl{text-decoration:line-through;color:var(--mut)}
+.dur{font-family:var(--mono);font-size:11px;color:var(--mut);white-space:nowrap;padding-top:2px}
+.exp{font-size:11.5px;color:var(--dim);margin-top:4px}
+.steps{margin:8px 0 0;padding:6px 0 0;border-top:1px solid var(--line);display:none}
+.ev.open .steps{display:block}
+.step{display:flex;align-items:flex-start;gap:9px;padding:7px 0;cursor:pointer;width:100%;text-align:left}
+.step .box{width:19px;height:19px;border-radius:6px;border:1.5px solid var(--line2);flex:0 0 auto;display:grid;place-items:center;color:transparent;font-size:11px;font-weight:700;margin-top:1px}
+.step.on .box{background:var(--teal);border-color:var(--teal);color:#052018}
+.step .n{font-family:var(--mono);font-size:11px;color:var(--dim);flex:0 0 16px;padding-top:2px}
+.step .ct{font-size:13px;color:#d6dce5;line-height:1.5}.step.on .ct{color:var(--mut);text-decoration:line-through}
+h2.sec{font-family:var(--disp);font-size:15px;font-weight:600;color:var(--tx);margin:26px 2px 8px}
+details.card{background:var(--surf);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;margin-top:8px}
+details.card summary{cursor:pointer;font-weight:600;font-size:14px;list-style:none}
+details.card summary::-webkit-details-marker{display:none}
+details.card summary::after{content:"+";float:right;color:var(--mut);font-family:var(--mono)}
+details.card[open] summary::after{content:"−"}
+details.card ol{margin:10px 0 2px;padding-left:20px}details.card li{margin:6px 0;font-size:13px;color:#d6dce5;line-height:1.5}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:11.5px;color:var(--mut);margin:14px 2px 0}
+.legend span::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:0}
+.legend .m::before{background:var(--amber)}.legend .q::before{background:var(--gold)}.legend .l::before{background:var(--cyan)}
+.legend .v::before{background:var(--sky)}.legend .r::before{background:var(--teal)}
+.foot{font-size:11.5px;color:var(--dim);margin:22px 2px 0;line-height:1.6}
+.foot button{color:var(--mut);text-decoration:underline;font-size:11.5px;padding:0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="topin">
+    <div class="brand"><div class="k">The <b>Desk</b> countdown</div><a href="index.html">← Back to The Desk</a></div>
+    <div class="cd"><div class="n mono" id="days">—</div><div class="l">days to CAT</div></div>
+  </div>
+  <nav class="strip" id="strip" aria-label="Days"></nav>
+</header>
+
+<main class="wrap">
+  <section class="hero" id="hero"></section>
+  <div class="navd">
+    <button class="btn" id="prev">‹ Previous day</button>
+    <button class="btn today" id="tod">Today</button>
+    <button class="btn" id="next">Next day ›</button>
+  </div>
+  <div class="legend"><span class="m">Mock</span><span class="q">QA</span><span class="l">DILR</span><span class="v">VARC</span><span class="r">Review</span></div>
+  <div class="slots" id="slots"></div>
+
+  <h2 class="sec">Protocols</h2>
+  <details class="card"><summary>DILR in the exam (and every mock)</summary><ol>
+    <li>Scan, 5 minutes max. For each set: FATE ticks on paper, count unknowns against relations, read the question stems. Unsure? Try to fix one fact in 90 seconds.</li>
+    <li>Order: sets with a forced starting point first, long-but-determined sets next, open-ended sets last.</li>
+    <li>Limits: 13 minutes per set, 3 minutes per question.</li>
+    <li>While solving: write every comparison as an equation, check totals immediately, never overwrite a cell, box finished scenarios.</li>
+    <li>After placing what’s forced, name the open choices. Test each against the most demanding condition.</li>
+    <li>Before answering: tick off every condition, and check your answers against each other.</li>
+    <li>TITA: always enter an answer. MCQ: only when decided or checkable.</li>
+  </ol></details>
+  <details class="card"><summary>When you panic: “too many possibilities”</summary><ol>
+    <li>Stop. Write every option on paper, side by side.</li>
+    <li>Find one condition you haven’t used yet.</li>
+    <li>Test each option against it, one line each. Strike out what fails.</li>
+    <li>If none fail, keep them all and move on. Open options are allowed.</li>
+    <li>Three minutes with nothing fixed: take what you can and leave the set.</li>
+  </ol></details>
+  <details class="card"><summary>VARC in the exam</summary><ol>
+    <li>RCs first, then TITAs. Skip MCQ-type VA.</li>
+    <li>Paraphrase each paragraph in one plain line as you read.</li>
+    <li>For each answer, go back to the line that decides it before choosing.</li>
+    <li>TITAs: paraphrase each sentence, then link by what each refers back to.</li>
+  </ol></details>
+  <details class="card"><summary>QA in the exam</summary><ol>
+    <li>3-minute scan: mark in-pool questions (arithmetic, algebra, progressions, and anything whose tools are in-pool).</li>
+    <li>4-minute cap per question. Stuck? Mark it and move.</li>
+    <li>Use the options: plug in, estimate, check plausibility.</li>
+    <li>Last 2–3 minutes: check signs, zeros and units on answered questions.</li>
+  </ol></details>
+  <details class="card"><summary>Mock analysis checklist</summary><ol>
+    <li>VARC: deciding line + leak tag for every wrong answer.</li>
+    <li>DILR: scan ranking vs result; every error tagged (selection, reading, method, calculation, knowledge, time sink); one “When X, do Y” line per new mistake.</li>
+    <li>QA: every question tagged (skipped on reading, abandoned, never reached, wrong); wrong ones logged in Errors.</li>
+    <li>Log the mock in The Desk → Mocks.</li>
+    <li>One thing to do differently next mock.</li>
+  </ol></details>
+
+  <p class="foot">Ticks are saved on this device only. <button id="reset">Clear all ticks</button></p>
+</main>
+
+<script>
+(function(){
+const EXAM='2026-11-29';
+const KEY='desk-countdown-v1';
+let st;try{st=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){st={}}
+st.done=st.done||{};st.steps=st.steps||{};
+function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
+
+const P={
+ pre:["Read your DILR signal list once, top to bottom.","Open the DILR protocol at the bottom of this page and read it.","Phone in another room. Water, rough sheets, two pens, a timer."],
+ mock:["Full mock in one sitting: VARC 40 → DILR 40 → QA 40. No pausing.","VARC: RCs first, then TITAs. Skip MCQ-type VA.","DILR, first 5 minutes: scan every set and write FATE ticks and your order on paper before solving anything.","DILR: 13-minute cap per set, 3 minutes per question, tick off every condition before answering.","QA: 3-minute scan first, mark in-pool questions, 4-minute cap per question.","TITA: always enter an answer. MCQ: only when decided or checkable."],
+ notes:["Before opening any solution: write the DILR set order you took.","Write the time spent on each set, and where each one stopped.","Write which FATE ticks turned out wrong, and why."],
+ analysis:["VARC, 30 min: for every wrong RC answer, find the one line that decides it and tag the leak (reused words, inversion, endpoint, scope, attribution).","DILR, 45 min: compare your scan ranking with what actually happened. Tag every error: selection, reading, method, calculation, knowledge, or time sink.","DILR: for each new mistake, write one line on your list: “When X, do Y.”","QA, 45 min: tag every question: skipped on reading, abandoned, never reached, or wrong (slip, concept, trap). Log each wrong one in The Desk → Errors.","Log the mock in The Desk → Mocks.","Write ONE thing you’ll do differently in the next mock."],
+ resolve:["Re-solve every DILR set you got wrong or skipped, cold, 15-minute cap each. No solution until you’ve finished.","Re-solve every in-pool QA question you got wrong or skipped, 4-minute cap each.","Compare each with the fastest solution. Where it beats yours, replay the fast route once, straight away."],
+ qa:c=>["Method sprint, 15–20 min: take 10 "+c+" PYQs. For each, write only the method and the first step. Check against the solution.","Timed solve: the next "+c+" PYQs from your YouTube series, 4-minute cap each. Mark ✓, ✗ or skip. Video stays paused until you’ve attempted.","Review: watch solutions only for ✗ and skips. Log each in The Desk → Errors with what tripped you and the right first move.","Add any shortcut you learned to your tricks list."],
+ qaMix:["3-minute scan, exactly like the exam: mark which questions are in-pool.","Timed set: 10 mixed PYQs (arithmetic, algebra, progressions), 4-minute cap each.","Review every ✗ and skip. Log each in The Desk → Errors.","For each one you solved slowly, find the fastest route and replay it."],
+ calc:["Tables to 20, squares to 30, cubes to 15.","Fraction ↔ percentage: 1/7 to 1/12, and their multiples.","Answer in your head first, then check."],
+ rc:["Two hard CAT past-paper RCs back to back, 16-minute cap. Pick philosophy, culture, literature or social theory.","Paraphrase each paragraph in one plain line as you read.","Review, 10 min: for every wrong answer, find the deciding line and tag the leak.","2–3 TITAs, 8 min: paraphrase each sentence, then link them by what each refers back to."],
+ fatigue:["VARC sectional, 40 min, strict timer.","No break. Straight into a DILR sectional, 40 min.","DILR exactly as in a mock: 5-minute scan with written ticks, 13-minute cap per set, condition tick-off.","Review both, 30 min, using the same tags as mock analysis."],
+ fmt:["One set in a format you’d skip on sight: box plots, two-way % tables, Venn, scatter, network/flow, max-min, triangular graph.","First 20 min: try it yourself, untimed.","Then the solution. Write the trigger line: what in the set should tell you the starting move.","Add the format to your format list as learned."],
+ timed:["Two unseen DILR PYQ sets. Scan first, 13-minute cap each.","After each: tick off every condition, check answers against each other.","Review: find the exact line where you got stuck. Add a “When X, do Y” line if it’s new."],
+ replay:["Pick the 2 DILR sets from recent mocks you found hardest.","Re-solve them from a blank page using only the fast route.","Time each. The goal is the route becoming automatic, not just the answer."],
+ errq:["Open The Desk → Errors → Due for re-solve.","Re-solve each one cold on paper, then mark ✓ or ✗.","Anything ✗ twice: watch the solution and write the first move on top of the question."],
+ lists:["Update your three lists: DILR signals, QA tricks, VARC leaks.","Read the DILR signal list once, end to end."]
+};
+const S=(t,dur,sec,tag,title,steps,exp)=>({t,dur,sec,tag,title,steps,exp});
+
+function mockDay(n,ch,mix){return[
+ S("08:10","20m","prep","Prep","Before the mock",P.pre),
+ S("08:30","2h","mock","Mock","Mock "+n,P.mock,"Exam-slot timing."),
+ S("10:30","30m","prep","Break","Break, away from the desk",["Eat something, walk, no phone scrolling."]),
+ S("11:00","20m","review","Review","DILR notes while fresh",P.notes),
+ S("11:20","2h","review","Review","Full analysis of Mock "+n,P.analysis),
+ S("13:20","55m","prep","Break","Lunch",["Proper meal, away from the desk."]),
+ S("14:15","1h45m","review","Fix","Re-solve Mock "+n+"’s misses",P.resolve),
+ S("16:15","1h15m","qa","QA",mix?"Mixed QA timed set":"QA: "+ch,mix?P.qaMix:P.qa(ch)),
+ S("17:45","15m","qa","QA","Calculation fluency",P.calc),
+ S("18:00","20m","review","Review","Errors due today",P.errq),
+ S("18:20","15m","review","Review","Update your lists",P.lists)
+];}
+function fixDay(from,ch,mix){return[
+ S("08:30","1h20m","lrdi","VARC → DILR","Fatigue pair: VARC 40 → DILR 40",P.fatigue),
+ S("09:50","30m","review","Review","Review both sectionals",["Tag every VARC miss and every DILR error, same tags as a mock."]),
+ S("10:30","2h","qa","QA",mix?"Mixed QA timed sets":"QA: "+ch,mix?P.qaMix:P.qa(ch)),
+ S("12:30","1h","prep","Break","Lunch",["Proper meal, away from the desk."]),
+ S("13:30","1h15m","review","Fix","Re-solve misses from "+from,["Every DILR set and in-pool QA question you missed in "+from+", cold, no solutions open.","Where the solution was faster than yours, replay the fast route once."]),
+ S("15:00","45m","lrdi","DILR",mix?"Replay fast routes":"Format gap set",mix?P.replay:P.fmt),
+ S("16:00","35m","varc","VARC","Two RCs + TITAs",P.rc),
+ S("16:45","20m","qa","QA","Calculation fluency",P.calc),
+ S("17:05","30m","review","Review","Errors due today",P.errq),
+ S("17:35","20m","review","Review","Update your lists",P.lists)
+];}
+function eveA(ch,mix){return[
+ S("After office","1h20m","lrdi","VARC → DILR","Fatigue pair: VARC 40 → DILR 40",P.fatigue),
+ S("+1h20m","25m","review","Review","Review both sectionals",["Tag every VARC miss and every DILR error, same tags as a mock."]),
+ S("+1h45m","1h","qa","QA",mix?"Mixed QA timed set":"QA: "+ch,mix?P.qaMix:P.qa(ch)),
+ S("+2h45m","15m","qa","QA","Calculation fluency",P.calc),
+ S("+3h","20m","review","Review","Errors due today",P.errq)
+];}
+function eveB(ch,mix,lr){return[
+ S("After office","1h30m","qa","QA",mix?"Mixed QA timed sets":"QA: "+ch,mix?P.qaMix:P.qa(ch)),
+ S("+1h30m","40m","lrdi","DILR",lr==="replay"?"Replay fast routes":"Format gap set",lr==="replay"?P.replay:P.fmt),
+ S("+2h10m","35m","varc","VARC","Two RCs + TITAs",P.rc),
+ S("+2h45m","15m","qa","QA","Calculation fluency",P.calc)
+];}
+function workMock(n){return[
+ S("Before work","2h","mock","Mock","Mock "+n,P.pre.concat(P.mock),"Start early enough to finish before work."),
+ S("After work","20m","review","Review","DILR notes",P.notes),
+ S("+20m","2h","review","Review","Full analysis of Mock "+n,P.analysis),
+ S("+2h20m","40m","review","Fix","Start re-solving Mock "+n+"’s misses",P.resolve,"Whatever’s left rolls into tomorrow.")
+];}
+
+const D=[
+ {d:"2026-11-03",k:"work",kn:"Work evening",ti:"Set up for Mock 1",f:"Tonight: QA block, calculation, and get tomorrow’s mock ready.",qa:"TSD",s:[
+  S("Tonight","10m","prep","Prep","Add this page to your home screen",["Open it on your phone and use Share → Add to Home Screen.","Check that tomorrow shows Mock 1."]),
+  S("+10m","1h15m","qa","QA","QA: TSD",P.qa("TSD")),
+  S("+1h25m","15m","qa","QA","Calculation fluency",P.calc),
+  S("+1h40m","20m","prep","Prep","Get tomorrow’s mock ready",["Pick the mock and keep the link open.","Set out paper, pens, timer and water.","Set an alarm that leaves 2 hours before work, plus 15 minutes."])]},
+ {d:"2026-11-04",k:"mock",kn:"Mock · workday",ti:"Mock 1",f:"First mock on the new protocol. Write FATE ticks and set order during the DILR scan.",s:workMock(1)},
+ {d:"2026-11-05",k:"work",kn:"Work from home",ti:"Fix Mock 1, then TSD",f:"Finish the re-solves from Mock 1 before anything else.",qa:"TSD",s:[
+  S("Before work","35m","varc","VARC","Two RCs + TITAs",P.rc),
+  S("+35m","15m","qa","QA","Calculation fluency",P.calc),
+  S("After work","1h","review","Fix","Finish re-solving Mock 1’s misses",P.resolve),
+  S("+1h","1h30m","qa","QA","QA: TSD",P.qa("TSD")),
+  S("+2h30m","20m","review","Review","Errors due today",P.errq),
+  S("+2h50m","15m","review","Review","Update your lists",P.lists)]},
+ {d:"2026-11-06",k:"mock",kn:"Mock · work from home",ti:"Mock 2",f:"Apply the one change you wrote after Mock 1.",s:workMock(2)},
+ {d:"2026-11-07",k:"mock",kn:"Mock day · leave",ti:"Mock 3",f:"Finish TSD in the QA block today.",qa:"TSD",s:mockDay(3,"TSD")},
+ {d:"2026-11-08",k:"mock",kn:"Mock day · leave",ti:"Mock 4",f:"Algebra starts in today’s QA block.",qa:"Algebra",s:mockDay(4,"Algebra")},
+ {d:"2026-11-09",k:"fix",kn:"Fix day · leave",ti:"Fix Mocks 3 and 4",f:"Re-solve both mocks’ misses cold. Close one format gap.",qa:"Algebra",s:fixDay("Mocks 3 and 4","Algebra")},
+ {d:"2026-11-10",k:"mock",kn:"Mock day · leave",ti:"Mock 5",f:"Apply the one change you wrote after Mock 4.",qa:"Algebra",s:mockDay(5,"Algebra")},
+ {d:"2026-11-11",k:"mock",kn:"Mock day · leave",ti:"Mock 6",f:"Watch the exit rule: 3 minutes with nothing fixed means leave the set.",qa:"Algebra",s:mockDay(6,"Algebra")},
+ {d:"2026-11-12",k:"fix",kn:"Fix day · leave",ti:"Fix Mocks 5 and 6",f:"Re-solve both mocks’ misses cold. Close one format gap.",qa:"Algebra",s:fixDay("Mocks 5 and 6","Algebra")},
+ {d:"2026-11-13",k:"mock",kn:"Mock day · leave",ti:"Mock 7",f:"Last day of leave. Same protocol, no shortcuts on the analysis.",qa:"Algebra",s:mockDay(7,"Algebra")},
+ {d:"2026-11-14",k:"mock",kn:"Mock day · weekend",ti:"Mock 8",f:"Finish algebra this weekend.",qa:"Algebra",s:mockDay(8,"Algebra")},
+ {d:"2026-11-15",k:"fix",kn:"Fix day · weekend",ti:"Fix Mocks 7 and 8",f:"Algebra wraps up today. AP/GP starts tomorrow.",qa:"Algebra",s:fixDay("Mocks 7 and 8","Algebra")},
+ {d:"2026-11-16",k:"work",kn:"Office evening",ti:"AP/GP + format gap",f:"AP/GP from today. Keep the evening tight.",qa:"AP/GP",s:eveB("AP/GP",false,"fmt")},
+ {d:"2026-11-17",k:"work",kn:"Office evening",ti:"Fatigue pair + AP/GP",f:"VARC then DILR back to back, exactly like the exam.",qa:"AP/GP",s:eveA("AP/GP")},
+ {d:"2026-11-18",k:"work",kn:"Office evening",ti:"Finish AP/GP",f:"Last day for any new topic or new DILR format.",qa:"AP/GP",s:eveB("AP/GP",false,"fmt")},
+ {d:"2026-11-19",k:"work",kn:"Office evening",ti:"Fatigue pair + mixed QA",f:"No new material from today. Only what you already know.",qa:"Mixed",s:eveA("",true)},
+ {d:"2026-11-20",k:"work",kn:"Office evening",ti:"Mixed QA + replays",f:"Replay fast routes from your toughest mock sets.",qa:"Mixed",s:eveB("",true,"replay")},
+ {d:"2026-11-21",k:"mock",kn:"Mock day · weekend",ti:"Mock 9",f:"Final stretch: three mocks in three days.",qa:"Mixed",s:mockDay(9,"",true)},
+ {d:"2026-11-22",k:"mock",kn:"Mock day · weekend",ti:"Mock 10",f:"Apply the one change you wrote after Mock 9.",qa:"Mixed",s:mockDay(10,"",true)},
+ {d:"2026-11-23",k:"mock",kn:"Mock day · leave",ti:"Mock 11",f:"Watch your scan time: 5 minutes, then commit.",qa:"Mixed",s:mockDay(11,"",true)},
+ {d:"2026-11-24",k:"fix",kn:"Fix day · leave",ti:"Fix Mocks 9 to 11",f:"Nothing new. Re-solve misses, replay fast routes.",qa:"Mixed",s:fixDay("Mocks 9 to 11","",true)},
+ {d:"2026-11-25",k:"mock",kn:"Mock day · leave",ti:"Mock 12, the last one",f:"Last full mock. Treat it as a dress rehearsal for the 29th.",qa:"Mixed",s:mockDay(12,"",true)},
+ {d:"2026-11-26",k:"fix",kn:"Fix day · leave",ti:"Fix Mock 12",f:"Nothing new. Re-solve, replay, read your lists.",qa:"Mixed",s:fixDay("Mock 12","",true)},
+ {d:"2026-11-27",k:"fix",kn:"Fix day · leave",ti:"Final replays",f:"Only sets and questions you’ve done before. Build confidence in the routes.",qa:"Mixed",s:[
+  S("08:30","1h20m","lrdi","VARC → DILR","Fatigue pair, one last time",P.fatigue),
+  S("09:50","30m","review","Review","Review both sectionals",["Tag errors. Check you followed every protocol step."]),
+  S("10:30","1h30m","qa","QA","Re-solve your QA error log",["Go through The Desk → Errors, including killed questions.","Re-solve as many as you can cold, 4-minute cap each.","Note any that still fail. Read their first moves before bed."]),
+  S("12:00","1h","prep","Break","Lunch",["Proper meal, away from the desk."]),
+  S("13:00","1h","lrdi","DILR","Replay your hardest mock sets",P.replay),
+  S("14:15","35m","varc","VARC","Two RCs + TITAs",P.rc),
+  S("15:00","20m","qa","QA","Calculation fluency",P.calc),
+  S("15:30","30m","review","Review","Read all three lists end to end",["DILR signals, QA tricks, VARC leaks. Read slowly."])]},
+ {d:"2026-11-28",k:"fix",kn:"Taper · leave",ti:"Read, prepare, sleep",f:"This is part of the plan, not a break from it. Protect tomorrow’s focus.",s:[
+  S("09:00","1h","review","Review","Read your lists and protocols",["Read the DILR, QA and VARC protocols at the bottom of this page.","Read your DILR signal list and QA tricks list once.","Read your VARC leak list once."]),
+  S("10:15","45m","lrdi","DILR","One set you’ve solved before",["Pick a set you got right in a mock.","Re-solve it calmly using the protocol, no timer pressure.","Stop after this. No new sets today."]),
+  S("11:15","30m","varc","VARC","One RC you’ve done before",["Re-read and re-answer one RC you got fully right.","Notice the paraphrasing habit working. That’s all."]),
+  S("Afternoon","30m","prep","Prep","Exam logistics",["Admit card printed, valid photo ID ready.","Check your slot time and reporting time.","Plan the route and leave-by time. Add 30 minutes of buffer."]),
+  S("Evening","—","prep","Prep","Wind down",["No new questions, no mocks, no solution videos.","Light dinner, phone away early.","Sleep at your normal time or earlier."])]},
+ {d:"2026-11-29",k:"exam",kn:"Exam day",ti:"CAT 2026",f:"You’ve done this twelve times. Same protocol, same habits.",s:[
+  S("Wake","—","prep","Prep","Wake at least 3 hours before your slot",["Light breakfast, water.","Read the DILR protocol and the panic routine once. Nothing else."]),
+  S("Leave","—","prep","Prep","Leave with buffer",["Admit card, ID, any permitted items.","Reach the centre early."]),
+  S("Exam","2h","mock","Exam","The exam",["VARC: RCs first, then TITAs, skip MCQ-type VA.","DILR: 5-minute scan with ticks, order, 13-minute caps, condition tick-off.","QA: 3-minute scan, in-pool only, 4-minute caps.","A bad section doesn’t decide the next one. Reset at every section break."])]}
+];
+
+const pad=n=>String(n).padStart(2,"0");
+const iso=d=>d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+const todayIso=iso(new Date());
+const pd=s=>{const[a,b,c]=s.split("-").map(Number);return new Date(a,b-1,c)};
+const WD=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+const MO=["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+function idxFor(isoD){let i=D.findIndex(x=>x.d===isoD);if(i>=0)return i;return isoD<D[0].d?0:D.length-1;}
+let cur=idxFor(location.hash.slice(1)||todayIso);
+
+function dayProg(i){const day=D[i];const tot=day.s.length;let n=0;day.s.forEach((_,j)=>{if(st.done[day.d+"|"+j])n++});return{n,tot};}
+
+function renderStrip(){
+ const el=document.getElementById("strip");el.innerHTML="";
+ D.forEach((day,i)=>{
+  const dt=pd(day.d);const p=dayProg(i);
+  const b=document.createElement("button");
+  b.className="chipd "+(day.k==="mock"?"mock ":"")+(day.k==="exam"?"exam ":"")+(day.d===todayIso?"today ":"")+(i===cur?"sel":"");
+  b.setAttribute("aria-label",WD[dt.getDay()]+" "+dt.getDate()+" November, "+day.ti);
+  b.innerHTML='<div class="w">'+WD[dt.getDay()]+'</div><div class="d">'+dt.getDate()+'</div><div class="k"><i style="width:'+(p.tot?Math.round(p.n/p.tot*100):0)+'%"></i></div>';
+  b.onclick=()=>go(i);
+  el.appendChild(b);
+ });
+ const sel=el.children[cur];if(sel)sel.scrollIntoView({inline:"center",block:"nearest"});
+}
+
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+
+function renderDay(){
+ const day=D[cur];const dt=pd(day.d);const p=dayProg(cur);
+ const kc=day.k==="mock"?"mock":day.k==="fix"?"fix":day.k==="exam"?"exam":"work";
+ document.getElementById("hero").innerHTML=
+  '<span class="kind '+kc+'">'+esc(day.kn)+'</span>'+
+  '<h1>'+esc(day.ti)+'</h1>'+
+  '<div class="date">'+WD[dt.getDay()]+', '+dt.getDate()+' '+MO[dt.getMonth()]+(day.d===todayIso?' · today':'')+'</div>'+
+  '<div class="focus">'+esc(day.f)+'</div>'+
+  (day.qa?'<div class="qa">QA chapter: <b>'+esc(day.qa)+'</b></div>':'')+
+  '<div class="prog"><div class="bar"><i style="width:'+(p.tot?Math.round(p.n/p.tot*100):0)+'%"></i></div><span class="t">'+p.n+' / '+p.tot+' done</span></div>';
+ const box=document.getElementById("slots");box.innerHTML="";
+ day.s.forEach((s,j)=>{
+  const key=day.d+"|"+j;const done=!!st.done[key];
+  const wrap=document.createElement("div");wrap.className="slot "+s.sec+(done?" done":"");
+  const stepsHtml=s.steps.map((t,k)=>{const sk=key+"|"+k;const on=!!st.steps[sk];
+   return '<button class="step'+(on?' on':'')+'" data-sk="'+sk+'"><span class="box">✓</span><span class="n">'+(k+1)+'</span><span class="ct">'+esc(t)+'</span></button>'}).join("");
+  wrap.innerHTML='<div class="rail"><div class="t">'+esc(s.t)+'</div></div><div class="body"><div class="ev">'+
+   '<div class="evh"><button class="chk'+(done?' on':'')+'" aria-label="Mark slot done" aria-pressed="'+done+'">✓</button>'+
+   '<button class="grow" aria-expanded="false"><div class="tag">'+esc(s.tag)+'</div><div class="ttl">'+esc(s.title)+'</div>'+
+   (s.exp?'<div class="exp">'+esc(s.exp)+'</div>':'')+'<div class="exp">Tap for step-by-step</div></button>'+
+   '<span class="dur">'+esc(s.dur)+'</span></div><div class="steps">'+stepsHtml+'</div></div></div>';
+  const ev=wrap.querySelector(".ev");
+  wrap.querySelector(".grow").onclick=e=>{const o=ev.classList.toggle("open");e.currentTarget.setAttribute("aria-expanded",o);};
+  wrap.querySelector(".chk").onclick=()=>{st.done[key]=!st.done[key];save();renderAll(true);};
+  wrap.querySelectorAll(".step").forEach(b=>b.onclick=()=>{const sk=b.dataset.sk;st.steps[sk]=!st.steps[sk];
+   const all=s.steps.every((_,k)=>st.steps[key+"|"+k]);if(all)st.done[key]=true;save();
+   const openNow=true;renderAll(true);const again=document.querySelectorAll("#slots .ev")[j];if(again&&openNow)again.classList.add("open");});
+  box.appendChild(wrap);
+ });
+ const left=Math.round((pd(EXAM)-pd(todayIso))/86400000);
+ document.getElementById("days").textContent=left>0?left:left===0?"Today":"Done";
+ document.getElementById("prev").disabled=cur===0;document.getElementById("next").disabled=cur===D.length-1;
+}
+function renderAll(keepScroll){const y=window.scrollY;renderStrip();renderDay();if(keepScroll)window.scrollTo(0,y);}
+function go(i){cur=Math.max(0,Math.min(D.length-1,i));history.replaceState(null,"","#"+D[cur].d);renderAll();window.scrollTo(0,0);}
+document.getElementById("prev").onclick=()=>go(cur-1);
+document.getElementById("next").onclick=()=>go(cur+1);
+document.getElementById("tod").onclick=()=>go(idxFor(todayIso));
+document.getElementById("reset").onclick=()=>{if(confirm("Clear every tick on every day?")){st={done:{},steps:{}};save();renderAll(true);}};
+window.addEventListener("hashchange",()=>{const i=idxFor(location.hash.slice(1));if(i!==cur){cur=i;renderAll();}});
+renderAll();
+})();
+</script>
+</body>
+</html>
