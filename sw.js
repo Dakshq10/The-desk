@@ -4,10 +4,11 @@
    App state lives in localStorage / window.storage / Supabase, NOT here —
    this worker only makes the shell load offline and feel instant. */
 
-const CACHE = 'thedesk-v5';
+const CACHE = 'thedesk-v6';
 const SHELL = [
   './',
   './index.html',
+  './countdown.html',
   './manifest.json',
   './icon-192.png',
   './icon-512.png'
