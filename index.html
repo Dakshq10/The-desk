@@ -143,9 +143,6 @@ h2.sec::before{content:"";width:4px;height:4px;border-radius:50%;background:var(
 .nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--dim);padding:4px;font-size:9px;letter-spacing:.04em;font-weight:600;text-transform:uppercase;transition:color .12s}
 .nav button svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .nav button.on{color:var(--amber)}
-.nav a.navlink{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--dim);padding:4px;font-size:9px;letter-spacing:.04em;font-weight:600;text-transform:uppercase;text-decoration:none}
-.nav a.navlink svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.nav a.navlink:hover{color:var(--tx)}
 .focus{position:fixed;inset:0;z-index:60;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px}
 .focus.on{display:flex}
 .focus .eb{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);display:flex;align-items:center;gap:8px}
@@ -197,7 +194,7 @@ small.k{color:var(--dim)}.linkbtn{color:var(--amber);font-size:12.5px;font-weigh
 .cl-grp ul{margin:0;padding:0}
 .sheet{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.55);display:none;align-items:flex-end;justify-content:center}
 .sheet.on{display:flex}
-.sheetcard{background:var(--surf);border:1px solid var(--line2);border-radius:18px 18px 0 0;padding:17px 15px calc(18px + env(safe-area-inset-bottom));width:100%;max-width:680px;animation:up .2s ease}
+.sheetcard{background:var(--surf);border:1px solid var(--line2);border-radius:18px 18px 0 0;padding:17px 15px calc(18px + env(safe-area-inset-bottom));width:100%;max-width:680px;max-height:88vh;overflow-y:auto;animation:up .2s ease}
 @keyframes up{from{transform:translateY(40px);opacity:.6}to{transform:none;opacity:1}}
 .sheetcard h4{font-family:var(--disp);font-size:15.5px;margin:0 0 3px}
 .sheetcard .sub{color:var(--mut);font-size:12px;margin-bottom:13px}
@@ -314,6 +311,69 @@ small.k{color:var(--dim)}.linkbtn{color:var(--amber);font-size:12.5px;font-weigh
 .nrow .nt.tap{cursor:pointer}
 pre.sql{background:var(--bg2);border:1px solid var(--line2);border-radius:var(--rs);padding:11px;overflow-x:auto;font-family:var(--mono);font-size:11px;line-height:1.6;color:#cdd6e0;margin:0;white-space:pre}
 .sqld .warn{margin-top:10px}
+/* ===== CAT plan: day header, section colours, steps, calendar ===== */
+.phead{background:linear-gradient(140deg,#191c2e,#12141d);border:1px solid var(--line2);border-radius:var(--r);padding:12px 13px;margin:0 0 6px}
+.phead .pkind{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:20px;background:var(--surf2);color:var(--mut)}
+.phead.mock .pkind{background:var(--amber-d);color:#cfc8ff}.phead.fix .pkind{background:var(--teal-d);color:#aef0db}
+.phead.work .pkind{background:var(--sky-d);color:#bcd6ff}.phead.exam .pkind{background:#5e2430;color:#ffc4cf}
+.phead .pti{font-family:var(--disp);font-weight:600;font-size:18px;margin:8px 0 3px}
+.phead .pf{font-size:12.5px;color:#ccd3de;line-height:1.45}
+.phead .pqa{font-size:12px;color:var(--mut);margin-top:5px}.phead .pqa b{color:#ffd98a;font-weight:600}
+.pprog{display:flex;align-items:center;gap:10px;margin-top:10px}
+.pprog .bar{flex:1;height:5px;border-radius:5px;background:var(--surf2);overflow:hidden}.pprog .bar i{display:block;height:100%;background:var(--teal)}
+.pprog span{font-family:var(--mono);font-size:11px;color:var(--mut)}
+.slot.sec-mock .body::before{background:var(--amber)}.slot.sec-qa .body::before{background:var(--gold)}
+.slot.sec-lrdi .body::before{background:var(--cyan)}.slot.sec-varc .body::before{background:var(--sky)}
+.slot.sec-review .body::before{background:var(--teal)}.slot.sec-prep .body::before{background:var(--mut)}.slot.sec-break .body::before{background:var(--dim)}
+.slot.sec-mock .tag{color:#b9afff}.slot.sec-qa .tag{color:#ffd98a}.slot.sec-lrdi .tag{color:#9ff0f6}.slot.sec-varc .tag{color:#bcd6ff}.slot.sec-review .tag{color:#aef0db}
+.slot.sec-mock .ev{border-color:var(--amber-d)}
+.slot.done .body::before{background:var(--teal)}
+.slot.now .body::before{background:var(--amber)}
+.ev .note.psteps{color:var(--dim)}
+.psheet{margin:0 0 12px;border:1px solid var(--line);border-radius:10px;padding:4px 11px;background:var(--bg2)}
+.psheet .pexp{font-size:12px;color:var(--mut);padding:8px 0 4px}
+.pstep{display:flex;align-items:flex-start;gap:9px;padding:8px 0;width:100%;text-align:left;border-bottom:1px solid var(--line)}
+.pstep:last-child{border-bottom:none}
+.pstep .box{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--line2);flex:0 0 auto;display:grid;place-items:center;color:transparent;font-size:11px;font-weight:700;margin-top:1px}
+.pstep.on .box{background:var(--teal);border-color:var(--teal);color:#052018}
+.pstep .n{font-family:var(--mono);font-size:11px;color:var(--dim);flex:0 0 14px;padding-top:2px}
+.pstep .ct{font-size:13px;color:#d6dce5;line-height:1.5}.pstep.on .ct{color:var(--mut);text-decoration:line-through}
+.calwrap{margin-top:20px}
+.cal{padding:12px}
+.calh{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.calh .mt{font-family:var(--disp);font-weight:600;font-size:14px}
+.calh button{width:28px;height:28px;border:1px solid var(--line2);border-radius:8px;color:var(--mut);font-size:15px}
+.cgrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.cgrid .cw{font-size:10px;color:var(--dim);text-align:center;font-weight:600;padding-bottom:2px}
+.cday{position:relative;height:40px;border-radius:8px;border:1px solid var(--line);background:var(--bg2);display:grid;place-items:center;font-family:var(--mono);font-size:12.5px;color:var(--mut);padding:0}
+.cday b{position:absolute;left:7px;right:7px;bottom:4px;height:2px;border-radius:2px;overflow:hidden}
+.cday b i{display:block;height:100%;background:var(--teal)}
+.cday.work{color:#bcd6ff}
+.cday.fix{border-color:#1f6b55;color:#aef0db}
+.cday.mock{background:var(--amber-d);border-color:#5148b0;color:#ece9ff;font-weight:700}
+.cday.exam{background:#5e2430;border-color:var(--coral);color:#ffd2da;font-weight:700}
+.cday.off{opacity:.35;cursor:default}
+.cday.today::after{content:"";position:absolute;top:4px;right:4px;width:5px;height:5px;border-radius:50%;background:var(--teal)}
+.cday.sel{outline:2px solid var(--tx);outline-offset:1px}
+.cday:not(.off):active{transform:scale(.95)}
+.clegend{display:flex;flex-wrap:wrap;gap:10px;font-size:11px;color:var(--mut);margin-top:10px}
+.clegend span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:5px;vertical-align:-1px;border:1px solid var(--line2);background:var(--bg2)}
+.clegend .m::before{background:var(--amber-d);border-color:#5148b0}.clegend .f::before{border-color:#1f6b55}.clegend .x::before{background:#5e2430;border-color:var(--coral)}
+.cstat{font-size:11.5px;color:var(--mut);margin-top:9px;line-height:1.5}.cstat b{color:var(--tx);font-weight:600}
+details.proto{background:var(--surf);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px}
+details.proto+details.proto{margin-top:8px}
+details.proto summary{cursor:pointer;font-weight:600;font-size:14px;list-style:none}
+details.proto summary::-webkit-details-marker{display:none}
+details.proto summary::after{content:"+";float:right;color:var(--mut);font-family:var(--mono)}
+details.proto[open] summary::after{content:"−"}
+details.proto ol{margin:10px 0 2px;padding-left:20px}details.proto li{margin:6px 0;font-size:13px;color:#d6dce5;line-height:1.5}
+@media (min-width:1000px){
+  .wrap:has(#v-today.on){max-width:1020px}
+  #v-today.on{display:grid;grid-template-columns:minmax(0,1fr) 300px;column-gap:24px;align-items:start}
+  #v-today>*{grid-column:1}
+  #v-today>.calwrap{grid-column:2;grid-row:1 / span 40;position:sticky;top:64px;margin-top:0}
+  .cday{height:36px}
+}
 </style>
 
 <div class="top">
@@ -333,7 +393,8 @@ pre.sql{background:var(--bg2);border:1px solid var(--line2);border-radius:var(--
     <div class="hint">No time in it → it stays a note. Add a time (<b>45m</b>, <b>2h</b>) and it gets scheduled. Start with <b>QA:</b>, <b>LRDI:</b> or <b>VARC:</b> (or mention rc / lrdi / quant) and it goes into a study block. <b>urgent</b>, <b>critical</b>, <b>emergency</b> and <b>leave tomorrow</b> still work.</div>
     <div class="card" id="inbox" style="margin-top:8px"></div>
     <div id="operator" style="margin-top:12px"></div>
-    <h2 class="sec">Schedule <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--dim);font-size:11px;margin-left:auto">tap a block · drag to reschedule</span></h2>
+    <aside class="calwrap" id="calwrap"><div class="card cal" id="cal"></div></aside>
+    <h2 class="sec" id="schedHead">Schedule <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--dim);font-size:11px;margin-left:auto">tap a block · drag to reschedule</span></h2>
     <div class="drag-tip" id="dragTip">Hold &amp; drag a task onto a free slot to move it — no menus.</div>
     <div class="daynav">
       <button class="dbtn" id="dPrev" onclick="shiftDay(-1)">‹</button>
@@ -341,6 +402,7 @@ pre.sql{background:var(--bg2);border:1px solid var(--line2);border-radius:var(--
       <button class="dbtn" id="dNext" onclick="shiftDay(1)">›</button>
       <button class="linkbtn" id="dHome" onclick="shiftDay(0)" style="display:none">today</button>
     </div>
+    <div id="planHead"></div>
     <div class="agenda" id="agenda"></div>
   </section>
 
@@ -387,8 +449,8 @@ pre.sql{background:var(--bg2);border:1px solid var(--line2);border-radius:var(--
     <h2 class="sec">Sectional log</h2>
     <div class="card" id="secList"></div>
 
-    <h2 class="sec">Mock day protocol</h2>
-    <div class="card" id="mockProto"></div>
+    <h2 class="sec">Protocols</h2>
+    <div id="mockProto"></div>
     <div class="card" id="mockHist" style="margin-top:12px"></div>
   </section>
 
@@ -552,7 +614,6 @@ create trigger desk_state_history_trg before update on desk_state
 <nav class="nav" id="nav">
   <button data-v="today" class="on"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Now</button>
   <button data-v="plan"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Quant</button>
-  <a class="navlink" href="countdown.html"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Plan</a>
   <button data-v="mocks"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>Mocks</button>
   <button data-v="errors"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5M12 16h.01"/></svg>Errors</button>
   <button data-v="setup"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 0 1-4 0v-.1A1.6 1.6 0 0 0 7 19.4l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.6 1.6 0 0 0 3 14a2 2 0 0 1 0-4h.1A1.6 1.6 0 0 0 4.6 7l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1A1.6 1.6 0 0 0 10 3.6V3a2 2 0 0 1 4 0v.1A1.6 1.6 0 0 0 17 4.6l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0 1.1 2.7H21a2 2 0 0 1 0 4z"/></svg>Setup</button>
@@ -802,6 +863,148 @@ function ensureShape(){
   });
 }
 
+/* ===================== CAT PLAN · Nov 3 → exam =====================
+   The final-stretch plan. On a plan day it REPLACES the default weekday / weekend blocks
+   (gym and the generic study blocks). Work, dinner and wind-down stay.
+   Every slot has a real clock time, laid out against the default Setup hours
+   (wake 06:30 · work 10:00–19:30 · dinner till 20:15 · sleep 23:30).
+   Ticks live in S.overrides like every other block, so they sync. */
+const PSTEP={
+ pre:["Read your DILR signal list once, top to bottom.","Read the DILR protocol (Mocks → Protocols).","Phone in another room. Water, rough sheets, two pens, a timer."],
+ ready:["Mock picked and the link open.","Paper, pens, timer and water on the desk."],
+ mock:["Full mock in one sitting: VARC 40 → DILR 40 → QA 40. No pausing.","VARC: RCs first, then TITAs. Skip MCQ-type VA.","DILR, first 5 minutes: scan every set and write FATE ticks and your order on paper before solving anything.","DILR: 13-minute cap per set, 3 minutes per question, tick off every condition before answering.","QA: 3-minute scan first, mark in-pool questions, 4-minute cap per question.","TITA: always enter an answer. MCQ: only when decided or checkable."],
+ notes:["Before opening any solution: write the DILR set order you took.","Write the time spent on each set, and where each one stopped.","Write which FATE ticks turned out wrong, and why."],
+ analysis:["VARC, 30 min: for every wrong RC answer, find the one line that decides it and tag the leak (reused words, inversion, endpoint, scope, attribution).","DILR, 45 min: compare your scan ranking with what actually happened. Tag every error: selection, reading, method, calculation, knowledge, or time sink.","DILR: for each new mistake, write one line on your list: “When X, do Y.”","QA, 45 min: tag every question: skipped on reading, abandoned, never reached, or wrong (slip, concept, trap). Log each wrong one in Errors.","Log the mock in Mocks.","Write ONE thing you’ll do differently in the next mock."],
+ resolve:["Re-solve every DILR set you got wrong or skipped, cold, 15-minute cap each. No solution until you’ve finished.","Re-solve every in-pool QA question you got wrong or skipped, 4-minute cap each.","Compare each with the fastest solution. Where it beats yours, replay the fast route once, straight away."],
+ qa:c=>["Method sprint, 15–20 min: take 10 "+c+" PYQs. For each, write only the method and the first step. Check against the solution.","Timed solve: the next "+c+" PYQs from your YouTube series, 4-minute cap each. Mark ✓, ✗ or skip. Video stays paused until you’ve attempted.","Review: watch solutions only for ✗ and skips. Log each in Errors with what tripped you and the right first move.","Add any shortcut you learned to your tricks list."],
+ qaMix:["3-minute scan, exactly like the exam: mark which questions are in-pool.","Timed set: 10 mixed PYQs (arithmetic, algebra, progressions), 4-minute cap each.","Review every ✗ and skip. Log each in Errors.","For each one you solved slowly, find the fastest route and replay it."],
+ calc:["Tables to 20, squares to 30, cubes to 15.","Fraction ↔ percentage: 1/7 to 1/12, and their multiples.","Answer in your head first, then check."],
+ rc:["Two hard CAT past-paper RCs back to back, 16-minute cap. Pick philosophy, culture, literature or social theory.","Paraphrase each paragraph in one plain line as you read.","Review, 10 min: for every wrong answer, find the deciding line and tag the leak.","2–3 TITAs, 8 min: paraphrase each sentence, then link them by what each refers back to."],
+ fatigue:["VARC sectional, 40 min, strict timer.","No break. Straight into a DILR sectional, 40 min.","DILR exactly as in a mock: 5-minute scan with written ticks, 13-minute cap per set, condition tick-off."],
+ fatRev:["Tag every VARC miss and every DILR error, same tags as mock analysis."],
+ fmt:["One set in a format you’d skip on sight: box plots, two-way % tables, Venn, scatter, network/flow, max-min, triangular graph.","First 20 min: try it yourself, untimed.","Then the solution. Write the trigger line: what in the set should tell you the starting move.","Add the format to your format list as learned."],
+ replay:["Pick the 2 DILR sets from recent mocks you found hardest.","Re-solve them from a blank page using only the fast route.","Time each. The goal is the route becoming automatic, not just the answer."],
+ errq:["Open Errors → Due for re-solve.","Re-solve each one cold on paper, then mark ✓ or ✗.","Anything ✗ twice: watch the solution and write the first move on top of the question."],
+ lists:["Update your three lists: DILR signals, QA tricks, VARC leaks.","Read the DILR signal list once, end to end."],
+ lunch:["Proper meal, away from the desk."],
+ brk:["Eat something, walk, no phone scrolling."]
+};
+const PLAN_DAYS=(()=>{
+  // run('HH:MM', [[mins, sec, tag, title, steps, exp], …]) lays slots back to back. [mins] alone = a gap.
+  const run=(start,items)=>{ let t=toMin(start); const out=[]; items.forEach(([m,sec,tag,title,steps,exp])=>{ if(sec) out.push({s:t,e:t+m,sec,tag,title,steps:steps||[],exp:exp||''}); t+=m; }); return out; };
+  const P=PSTEP, qaBlock=(m,ch,mix)=>[m,'qa','QA',mix?'Mixed QA timed set':'QA: '+ch,mix?P.qaMix:P.qa(ch)];
+  const mockDay=(n,ch,mix)=>run('08:10',[
+    [20,'prep','Prep','Before the mock',P.pre],
+    [120,'mock','Mock','Mock '+n,P.mock,'Exam-slot timing.'],
+    [30,'break','Break','Break, away from the desk',P.brk],
+    [20,'review','Review','DILR notes while fresh',P.notes],
+    [120,'review','Analysis','Full analysis of Mock '+n,P.analysis],
+    [55,'break','Break','Lunch',P.lunch],
+    [105,'review','Fix','Re-solve Mock '+n+'’s misses',P.resolve],[15],
+    qaBlock(75,ch,mix),[15],
+    [15,'qa','QA','Calculation fluency',P.calc],
+    [20,'review','Review','Errors due today',P.errq],
+    [15,'review','Review','Update your lists',P.lists]]);
+  const fixDay=(from,ch,mix)=>run('08:30',[
+    [80,'lrdi','VARC → DILR','Fatigue pair: VARC 40 → DILR 40',P.fatigue],
+    [30,'review','Review','Review both sectionals',P.fatRev],[10],
+    qaBlock(120,ch,mix),
+    [60,'break','Break','Lunch',P.lunch],
+    [75,'review','Fix','Re-solve misses from '+from,['Every DILR set and in-pool QA question you missed in '+from+', cold, no solutions open.','Where the solution was faster than yours, replay the fast route once.']],[15],
+    [45,'lrdi','DILR',mix?'Replay fast routes':'Format gap set',mix?P.replay:P.fmt],[15],
+    [35,'varc','VARC','Two RCs + TITAs',P.rc],[10],
+    [20,'qa','QA','Calculation fluency',P.calc],
+    [30,'review','Review','Errors due today',P.errq],
+    [20,'review','Review','Update your lists',P.lists]]);
+  // Office days: the morning before work (07:00–09:30) and the evening after dinner (20:15–22:45).
+  const workMock=n=>[...run('06:50',[
+    [20,'prep','Prep','Before the mock',P.ready.concat(P.pre)],
+    [120,'mock','Mock','Mock '+n,P.mock,'Done before work. Leaves 50 min to get ready.']]),
+   ...run('20:15',[
+    [20,'review','Review','DILR notes',P.notes],
+    [120,'review','Analysis','Full analysis of Mock '+n,P.analysis,'Re-solving the misses happens tomorrow morning.']])];
+  const workFix=(n,ch)=>[...run('07:00',[
+    [60,'review','Fix','Re-solve Mock '+n+'’s misses',P.resolve],
+    [35,'varc','VARC','Two RCs + TITAs',P.rc],
+    [15,'qa','QA','Calculation fluency',P.calc]]),
+   ...run('20:15',[
+    qaBlock(90,ch),
+    [20,'review','Review','Errors due today',P.errq],
+    [15,'review','Review','Update your lists',P.lists]])];
+  const eveA=(ch,mix)=>[...run('07:00',[
+    [80,'lrdi','VARC → DILR','Fatigue pair: VARC 40 → DILR 40',P.fatigue,'Before work, while you’re fresh.'],
+    [25,'review','Review','Review both sectionals',P.fatRev],
+    [15,'qa','QA','Calculation fluency',P.calc]]),
+   ...run('20:15',[
+    qaBlock(60,ch,mix),
+    [20,'review','Review','Errors due today',P.errq]])];
+  const eveB=(ch,mix,lr)=>[...run('07:00',[
+    [35,'varc','VARC','Two RCs + TITAs',P.rc],[5],
+    [40,'lrdi','DILR',lr==='replay'?'Replay fast routes':'Format gap set',lr==='replay'?P.replay:P.fmt],
+    [15,'qa','QA','Calculation fluency',P.calc]]),
+   ...run('20:15',[
+    [90,'qa','QA',mix?'Mixed QA timed sets':'QA: '+ch,mix?P.qaMix:P.qa(ch)]])];
+  const D=(d,k,kn,ti,f,qa,work,s)=>({d,k,kn,ti,f,qa,work,s});
+  return [
+   D('2026-11-03','mock','Mock · office day','Mock 1','First mock on the new protocol. Write FATE ticks and set order during the DILR scan.','TSD',true,workMock(1)),
+   D('2026-11-04','work','Office day','Fix Mock 1, then TSD','Re-solve Mock 1’s misses before anything else.','TSD',true,workFix(1,'TSD')),
+   D('2026-11-05','mock','Mock · work from home','Mock 2','Apply the one change you wrote after Mock 1.','TSD',true,workMock(2)),
+   D('2026-11-06','work','Work from home','Fix Mock 2, then TSD','Re-solve Mock 2’s misses before anything else.','TSD',true,workFix(2,'TSD')),
+   D('2026-11-07','mock','Mock day · weekend','Mock 3','Finish TSD in the QA block today.','TSD',false,mockDay(3,'TSD')),
+   D('2026-11-08','mock','Mock day · weekend','Mock 4','Algebra starts in today’s QA block.','Algebra',false,mockDay(4,'Algebra')),
+   D('2026-11-09','fix','Fix day · leave','Fix Mocks 3 and 4','Re-solve both mocks’ misses cold. Close one format gap.','Algebra',false,fixDay('Mocks 3 and 4','Algebra')),
+   D('2026-11-10','mock','Mock day · leave','Mock 5','Apply the one change you wrote after Mock 4.','Algebra',false,mockDay(5,'Algebra')),
+   D('2026-11-11','mock','Mock day · leave','Mock 6','Watch the exit rule: 3 minutes with nothing fixed means leave the set.','Algebra',false,mockDay(6,'Algebra')),
+   D('2026-11-12','fix','Fix day · leave','Fix Mocks 5 and 6','Re-solve both mocks’ misses cold. Close one format gap.','Algebra',false,fixDay('Mocks 5 and 6','Algebra')),
+   D('2026-11-13','mock','Mock day · leave','Mock 7','Last day of leave. Same protocol, no shortcuts on the analysis.','Algebra',false,mockDay(7,'Algebra')),
+   D('2026-11-14','mock','Mock day · weekend','Mock 8','Finish algebra this weekend.','Algebra',false,mockDay(8,'Algebra')),
+   D('2026-11-15','fix','Fix day · weekend','Fix Mocks 7 and 8','Algebra wraps up today. AP/GP starts tomorrow.','Algebra',false,fixDay('Mocks 7 and 8','Algebra')),
+   D('2026-11-16','work','Office day','AP/GP + format gap','AP/GP from today. Keep the evening tight.','AP/GP',true,eveB('AP/GP',false,'fmt')),
+   D('2026-11-17','work','Office day','Fatigue pair + AP/GP','VARC then DILR back to back, exactly like the exam.','AP/GP',true,eveA('AP/GP')),
+   D('2026-11-18','work','Office day','Finish AP/GP','Last day for any new topic or new DILR format.','AP/GP',true,eveB('AP/GP',false,'fmt')),
+   D('2026-11-19','work','Office day','Fatigue pair + mixed QA','No new material from today. Only what you already know.','Mixed',true,eveA('',true)),
+   D('2026-11-20','work','Office day','Mixed QA + replays','Replay fast routes from your toughest mock sets.','Mixed',true,eveB('',true,'replay')),
+   D('2026-11-21','mock','Mock day · weekend','Mock 9','Final stretch: three mocks in three days.','Mixed',false,mockDay(9,'',true)),
+   D('2026-11-22','mock','Mock day · weekend','Mock 10','Apply the one change you wrote after Mock 9.','Mixed',false,mockDay(10,'',true)),
+   D('2026-11-23','mock','Mock day · leave','Mock 11','Watch your scan time: 5 minutes, then commit.','Mixed',false,mockDay(11,'',true)),
+   D('2026-11-24','fix','Fix day · leave','Fix Mocks 9 to 11','Nothing new. Re-solve misses, replay fast routes.','Mixed',false,fixDay('Mocks 9 to 11','',true)),
+   D('2026-11-25','mock','Mock day · leave','Mock 12, the last one','Last full mock. Treat it as a dress rehearsal for the 29th.','Mixed',false,mockDay(12,'',true)),
+   D('2026-11-26','fix','Fix day · leave','Fix Mock 12','Nothing new. Re-solve, replay, read your lists.','Mixed',false,fixDay('Mock 12','',true)),
+   D('2026-11-27','fix','Fix day · leave','Final replays','Only sets and questions you’ve done before. Build confidence in the routes.','Mixed',false,run('08:30',[
+     [80,'lrdi','VARC → DILR','Fatigue pair, one last time',P.fatigue],
+     [30,'review','Review','Review both sectionals',['Tag errors. Check you followed every protocol step.']],[10],
+     [90,'qa','QA','Re-solve your QA error log',['Go through Errors, including killed questions.','Re-solve as many as you can cold, 4-minute cap each.','Note any that still fail. Read their first moves before bed.']],
+     [60,'break','Break','Lunch',P.lunch],
+     [60,'lrdi','DILR','Replay your hardest mock sets',P.replay],[15],
+     [35,'varc','VARC','Two RCs + TITAs',P.rc],[10],
+     [20,'qa','QA','Calculation fluency',P.calc],[10],
+     [30,'review','Review','Read all three lists end to end',['DILR signals, QA tricks, VARC leaks. Read slowly.']]])),
+   D('2026-11-28','fix','Taper · leave','Read, prepare, sleep','This is part of the plan, not a break from it. Protect tomorrow’s focus.','',false,[
+     ...run('09:00',[
+       [60,'review','Review','Read your lists and protocols',['Read the DILR, QA and VARC protocols (Mocks → Protocols).','Read your DILR signal list and QA tricks list once.','Read your VARC leak list once.']],[15],
+       [45,'lrdi','DILR','One set you’ve solved before',['Pick a set you got right in a mock.','Re-solve it calmly using the protocol, no timer pressure.','Stop after this. No new sets today.']],[15],
+       [30,'varc','VARC','One RC you’ve done before',['Re-read and re-answer one RC you got fully right.','Notice the paraphrasing habit working. That’s all.']]]),
+     ...run('15:00',[[30,'prep','Prep','Exam logistics',['Admit card printed, valid photo ID ready.','Check your slot time and reporting time.','Plan the route and leave-by time. Add 30 minutes of buffer.']]]),
+     ...run('21:00',[[60,'prep','Prep','Wind down early',['No new questions, no mocks, no solution videos.','Light dinner, phone away early.','Sleep at your normal time or earlier.']]])]),
+   D('2026-11-29','exam','Exam day','CAT 2026','You’ve done this twelve times. Same protocol, same habits.','',false,[
+     ...run('05:30',[[45,'prep','Prep','Wake, 3 hours before your slot',['Light breakfast, water.','Read the DILR protocol and the panic routine once. Nothing else.']]]),
+     ...run('06:45',[[30,'prep','Prep','Leave with buffer',['Admit card, ID, any permitted items.','Reach the centre early.']]]),
+     ...run('08:30',[[120,'mock','Exam','CAT 2026',['VARC: RCs first, then TITAs, skip MCQ-type VA.','DILR: 5-minute scan with ticks, order, 13-minute caps, condition tick-off.','QA: 3-minute scan, in-pool only, 4-minute caps.','A bad section doesn’t decide the next one. Reset at every section break.'],'Set for the morning slot. Tap → Change today’s time if yours is later.']])])
+  ];
+})();
+const PLAN_BY=Object.fromEntries(PLAN_DAYS.map(d=>[d.d,d]));
+function planFor(k){ return PLAN_BY[k]||null; }
+const planId=(k,j)=>'pl-'+k+'-'+j;
+/* Works for moved / re-timed copies too ("pl-…-3-moved", "pl-…-3-time"). */
+function planSlotById(id){ const m=/^pl-(\d{4}-\d{2}-\d{2})-(\d+)/.exec(id||''); if(!m) return null; const d=planFor(m[1]); return d&&d.s[+m[2]]?{day:d,slot:d.s[+m[2]],base:'pl-'+m[1]+'-'+m[2]}:null; }
+function planKind(sec){ return sec==='break'?'fixed':'cat'; }
+function planProgress(k){
+  const d=planFor(k); if(!d) return null; const ov=S.overrides[k]||{};
+  const ids=d.s.map((x,j)=>x.sec==='break'?null:planId(k,j)).filter(Boolean);
+  return {n:ids.filter(id=>ov.done&&ov.done[id]).length,tot:ids.length};
+}
+function stepState(k,id){ const ov=S.overrides[k]||{}; return (ov.steps&&ov.steps[id])||{}; }
+
 /* ===================== SCHEDULER ===================== */
 /* Priority ladder — what a task is allowed to claim, in order:
    level 0 · free gaps only                          (low / normal)
@@ -825,7 +1028,15 @@ function applyCuts(blocks,k){
 function fixedBlocks(date){
   const p=S.profile, dow=date.getDay(), k=dayKey(date), ov=S.overrides[k]||{}, blocks=[];
   const add=(id,s,e,label,kind)=>{ if(ov.skip&&ov.skip[id])return; if(s&&e&&toMin(e)>toMin(s)) blocks.push({id,s:toMin(s),e:toMin(e),label,kind,fixed:true,done:!!(ov.done&&ov.done[id])}); };
-  if(dow===6){
+  const pd=planFor(k);
+  if(pd){
+    // Plan day: the plan's slots replace the default study / gym blocks.
+    if(pd.work){ add('wake',p.wd.wake,addMinStr(p.wd.wake,15),'Wake','fixed'); add('work',p.wd.workS,p.wd.workE,'Work','fixed'); add('dinner',p.wd.workE,addMinStr(p.wd.workE,45),'Dinner · reset','fixed'); }
+    else { if(pd.k!=='exam') add('wake',toHHMM(pd.s[0].s-40),toHHMM(pd.s[0].s),'Wake · breakfast','fixed'); add('dinner','20:00','20:45','Dinner','fixed'); }
+    pd.s.forEach((x,j)=>{ const id=planId(k,j); if(ov.skip&&ov.skip[id])return; blocks.push({id,s:x.s,e:x.e,label:x.title,kind:planKind(x.sec),fixed:true,done:!!(ov.done&&ov.done[id]),plan:true,sec:x.sec,ptag:x.tag}); });
+    const sl=isWeekend(date)?p.we.sleep:p.wd.sleep;
+    add('wind',addMinStr(sl,-45),sl,'Wind down','fixed');
+  } else if(dow===6){
     add('wake',p.we.wake,addMinStr(p.we.wake,40),'Wake · breakfast','fixed');
     add('mock',p.sat.mock.s,p.sat.mock.e,'Mock (2 hr) — simulate a slot','cat');
     add('study',p.sat.study.s,p.sat.study.e,'Study session','cat');
@@ -848,10 +1059,10 @@ function fixedBlocks(date){
     add('eve',p.eve.s,p.eve.e,'Evening study','cat');
     add('wind',addMinStr(p.wd.sleep,-45),p.wd.sleep,'Wind down','fixed');
   }
-  (ov.add||[]).forEach(b=>{ blocks.push({id:b.id,s:toMin(b.s),e:toMin(b.e),label:b.label,kind:b.kind,fixed:true,moved:true,done:!!(ov.done&&ov.done[b.id])}); });
+  (ov.add||[]).forEach(b=>{ const ps=planSlotById(b.id); blocks.push({id:b.id,s:toMin(b.s),e:toMin(b.e),label:b.label,kind:b.kind,fixed:true,moved:true,done:!!(ov.done&&ov.done[b.id]),...(ps?{plan:true,sec:ps.slot.sec,ptag:ps.slot.tag}:{})}); });
   return applyCuts(blocks,k).sort((a,b)=>a.s-b.s);
 }
-function dayBounds(date){const p=S.profile,we=isWeekend(date);return we?{wake:toMin(p.we.wake),sleep:toMin(p.we.sleep)}:{wake:toMin(p.wd.wake),sleep:toMin(p.wd.sleep)};}
+function dayBounds(date){const p=S.profile,we=isWeekend(date),b=we?{wake:toMin(p.we.wake),sleep:toMin(p.we.sleep)}:{wake:toMin(p.wd.wake),sleep:toMin(p.wd.sleep)};const pd=planFor(dayKey(date));if(pd)b.wake=Math.min(b.wake,pd.s[0].s-(pd.work||pd.k==='exam'?0:40));return b;}
 function freeIntervals(date){
   const {wake,sleep}=dayBounds(date), k=dayKey(date);
   let busy=fixedBlocks(date).map(b=>[b.s,b.e]);
@@ -1157,6 +1368,12 @@ function renderNow(){
   else if(cur){
     title=cur.label; timeStr=fmt12(cur.s)+' – '+fmt12(cur.e);
     if(cur.task){ sub=cur.multi?`Session ${cur.sessNo} of ${cur.sessTot} — I split this to fit your days.`:'Scheduled by me to fit your deadline.'; how=cur.task._how||'Knock it out, then check it off.'; btns=`<button class="btn" onclick="enterFocus('${cur.task.id}',${cur.e-cur.s})">Start focus</button><button class="btn alt sm" onclick="completeChunk('${cur.task.id}',${cur.e-cur.s})">Did it</button>`; }
+    else if(cur.plan){
+      const k0=dayKey(now), ps=planSlotById(cur.id), steps=ps?ps.slot.steps:[], st=stepState(k0,cur.id), nx=steps.findIndex((_,i)=>!st[i]);
+      sub=(cur.ptag||'')+' · '+(cur.e-cur.s)+' min'+(steps.length?' · step '+(nx<0?steps.length:nx+1)+' of '+steps.length:'');
+      how=nx>=0?'<b>Next:</b> '+esc(steps[nx]):(steps.length?'All steps ticked.':'');
+      btns=`<button class="btn" onclick="openBlockSheet('${cur.id}','${k0}','${esc(cur.label)}','${cur.kind}',${cur.s},${cur.e})">Open steps</button>`;
+    }
     else if(cur.kind==='cat'){
       if(/mock/i.test(cur.label)){title='Mock — simulate the real slot';sub='2 hours, no pausing. Note time per section as you go.';how='Phone off. Treat it like the exam. Tomorrow is analysis — not another mock.';btns=`<button class="btn" onclick="go('mocks')">Mock protocol</button>`;}
       else if(/analysis/i.test(cur.label)){title='Mock analysis — where percentile is made';sub='Every wrong Q, every skipped-but-doable Q, every Q over 2 min.';how='For each: write <b>what tripped you</b> + <b>the right first move</b> into your error log.';btns=`<button class="btn" onclick="go('mocks')">Analysis checklist</button>`;}
@@ -1166,7 +1383,37 @@ function renderNow(){
   document.getElementById('nowCard').innerHTML=`<div class="eyebrow"><span class="dot"></span> Right now · ${fmt12(nowMin)} · ${DAYNAMES[now.getDay()]}</div><h1>${esc(title)}</h1><div class="sub">${esc(sub)}</div>${how?`<div class="how">${how}</div>`:''}<div class="meta">${btns}<div class="ringwrap"><div class="ring" style="--p:${prog}"><i>${prog}%</i></div></div></div>${timeStr?`<div class="time" style="margin-top:8px">⏱ ${timeStr}</div>`:''}`;
 }
 let VIEW_OFF=0;
-window.shiftDay=(n)=>{ VIEW_OFF=n===0?0:Math.max(0,Math.min(20,VIEW_OFF+n)); renderAgenda(); };
+function maxViewOff(){ return Math.max(20,Math.round((parseLocal(S.profile.exam+'T00:00')-midnight())/86400000)); }
+window.shiftDay=(n)=>{ VIEW_OFF=n===0?0:Math.max(0,Math.min(maxViewOff(),VIEW_OFF+n)); CAL_SHOW=null; renderAgenda(); };
+let CAL_SHOW=null; // 'YYYY-MM' the calendar is showing; null = month of the viewed day
+window.pickDay=(k)=>{ const off=Math.round((parseLocal(k+'T00:00')-midnight())/86400000); if(off<0||off>maxViewOff())return; VIEW_OFF=off; CAL_SHOW=null; renderAgenda(); if(window.innerWidth<1000){ const h=document.getElementById('schedHead'); if(h) h.scrollIntoView({behavior:'smooth',block:'start'}); } };
+window.calMonth=(n)=>{ const vd=addDays(midnight(),VIEW_OFF), b=CAL_SHOW?parseLocal(CAL_SHOW+'-01T00:00'):new Date(vd.getFullYear(),vd.getMonth(),1); b.setMonth(b.getMonth()+n); CAL_SHOW=b.getFullYear()+'-'+pad(b.getMonth()+1); renderCal(); };
+const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+function renderCal(){
+  const host=document.getElementById('cal'); if(!host) return;
+  const today=midnight(), todayK=dayKey(today), vd=addDays(today,VIEW_OFF), selK=dayKey(vd), examK=S.profile.exam, maxK=dayKey(addDays(today,maxViewOff()));
+  const m0=CAL_SHOW?parseLocal(CAL_SHOW+'-01T00:00'):new Date(vd.getFullYear(),vd.getMonth(),1);
+  const y=m0.getFullYear(), mo=m0.getMonth(), nd=new Date(y,mo+1,0).getDate(), lead=(m0.getDay()+6)%7;
+  let cells=['M','T','W','T','F','S','S'].map(w=>`<span class="cw">${w}</span>`).join('')+'<span></span>'.repeat(lead);
+  for(let dn=1;dn<=nd;dn++){
+    const k=y+'-'+pad(mo+1)+'-'+pad(dn), pd=planFor(k), pr=planProgress(k), off=k<todayK||k>maxK;
+    const cls=['cday',k===examK?'exam':pd?pd.k:'',k===todayK?'today':'',k===selK?'sel':'',off?'off':''].filter(Boolean).join(' ');
+    const bar=pr&&pr.n?`<i style="width:${Math.round(pr.n/pr.tot*100)}%"></i>`:'';
+    cells+=`<button class="${cls}" ${off?'disabled':''} onclick="pickDay('${k}')" aria-label="${dn} ${MONTHS[mo]}${pd?' · '+esc(pd.ti):''}">${dn}<b>${bar}</b></button>`;
+  }
+  const mockDays=PLAN_DAYS.filter(d=>d.k==='mock'), mockDone=mockDays.filter(d=>{const j=d.s.findIndex(x=>x.sec==='mock');const ov=S.overrides[d.d]||{};return j>=0&&ov.done&&ov.done[planId(d.d,j)];}).length;
+  const nextMock=mockDays.find(d=>d.d>=todayK);
+  host.innerHTML=`<div class="calh"><button onclick="calMonth(-1)" aria-label="Previous month">‹</button><div class="mt">${MONTHS[mo]} ${y}</div><button onclick="calMonth(1)" aria-label="Next month">›</button></div>
+    <div class="cgrid">${cells}</div>
+    <div class="clegend"><span class="m">Mock</span><span class="f">Fix</span><span class="w">Office day</span><span class="x">Exam</span></div>
+    <div class="cstat">Mocks done <b>${mockDone} / ${mockDays.length}</b>${nextMock?` · next: <b>${esc(nextMock.ti.replace(/,.*/,''))}</b>, ${fmtDate(parseLocal(nextMock.d+'T00:00'))}`:''}</div>`;
+}
+function renderPlanHead(k){
+  const host=document.getElementById('planHead'); if(!host) return;
+  const pd=planFor(k); if(!pd){ host.innerHTML=''; return; }
+  const pr=planProgress(k);
+  host.innerHTML=`<div class="phead ${pd.k}"><span class="pkind">${esc(pd.kn)}</span><div class="pti">${esc(pd.ti)}</div><div class="pf">${esc(pd.f)}</div>${pd.qa?`<div class="pqa">QA chapter: <b>${esc(pd.qa)}</b></div>`:''}<div class="pprog"><div class="bar"><i style="width:${pr.tot?Math.round(pr.n/pr.tot*100):0}%"></i></div><span>${pr.n} / ${pr.tot} done</span></div></div>`;
+}
 function renderAgenda(){
   const now=nowDate(), nowMin=now.getHours()*60+now.getMinutes();
   const vd=addDays(midnight(),VIEW_OFF), isToday=VIEW_OFF===0, slots=buildSlots(vd), k=dayKey(vd), ov=S.overrides[k]||{};
@@ -1175,12 +1422,14 @@ function renderAgenda(){
   const fh=Math.floor(freeTot/60), fm=freeTot%60;
   if(lbl) lbl.innerHTML=`${isToday?'Today':VIEW_OFF===1?'Tomorrow':fmtDate(vd)}<small>${isToday||VIEW_OFF===1?fmtDate(vd)+' · ':''}${fh?fh+'h ':''}${fm}m free</small>`;
   const pb=document.getElementById('dPrev'); if(pb) pb.disabled=VIEW_OFF===0;
+  const nb=document.getElementById('dNext'); if(nb) nb.disabled=VIEW_OFF>=maxViewOff();
+  renderPlanHead(k); renderCal();
   const hb=document.getElementById('dHome'); if(hb) hb.style.display=VIEW_OFF?'inline':'none';
   const a=document.getElementById('agenda');
   if(!slots.length){a.innerHTML='<div class="empty">No blocks this day.</div>';return;}
   const {wake,sleep}=dayBounds(vd), rows=[]; let cursor=wake;
   // today only: the current-or-next study block carries the "dailies left" line
-  const dailyHost=isToday?slots.find(x=>x.fixed&&x.kind==='cat'&&!/mock|analysis/i.test(x.label)&&x.e>nowMin):null;
+  const dailyHost=isToday&&!planFor(k)?slots.find(x=>x.fixed&&x.kind==='cat'&&!/mock|analysis/i.test(x.label)&&x.e>nowMin):null;
   slots.forEach(s=>{ if(s.s-cursor>=20) rows.push({gap:true,s:cursor,e:s.s}); rows.push(s); cursor=Math.max(cursor,s.e); });
   if(sleep-cursor>=20) rows.push({gap:true,s:cursor,e:sleep});
   a.innerHTML=rows.map(s=>{
@@ -1191,8 +1440,8 @@ function renderAgenda(){
     // confirmed miss = you said so. unconfirmed = time passed, you just never ticked it.
     const isMissed = !done && ( (s.fixed && ov.miss && ov.miss[s.id]) || (t && (t._missKeys||[]).includes(chunkKey)) );
     const isUnconf = !done && !isMissed && ( (s.fixed && ov.missed && ov.missed[s.id]) || (t && (t._missedKeys||[]).includes(chunkKey)) );
-    let cls='slot '+(s.kind==='gym'?'gym':s.kind==='cat'?'cat':s.fixed?'fixed':'task'); if(isNow)cls+=' now'; if(done)cls+=' done'; if(isMissed)cls+=' missed'; if(isUnconf)cls+=' unconf';
-    const tag=s.fixed?(s.kind==='cat'?'CAT':s.kind==='gym'?'GYM':'FIXED')+(s.moved?' · MOVED':'')+(s.trimmed&&!s.trimStudy?' · TRIMMED':''):(t?taskCatLabel(t)+(s.multi?` · ${s.sessNo}/${s.sessTot}`:''):'TASK');
+    let cls='slot '+(s.kind==='gym'?'gym':s.kind==='cat'?'cat':s.fixed?'fixed':'task'); if(isNow)cls+=' now'; if(done)cls+=' done'; if(isMissed)cls+=' missed'; if(isUnconf)cls+=' unconf'; if(s.plan)cls+=' sec-'+s.sec;
+    const tag=s.plan?esc(s.ptag)+(s.moved?' · MOVED':''):s.fixed?(s.kind==='cat'?'CAT':s.kind==='gym'?'GYM':'FIXED')+(s.moved?' · MOVED':'')+(s.trimmed&&!s.trimStudy?' · TRIMMED':''):(t?taskCatLabel(t)+(s.multi?` · ${s.sessNo}/${s.sessTot}`:''):'TASK');
     let right='', evClick='';
     if(isUnconf){
       const call=s.fixed?`confirmBlock('${s.id}','${k}',%V%,'${s.kind}',${s.e-s.s})`:`confirmChunk('${t.id}','${chunkKey}',%V%,${s.e-s.s})`;
@@ -1210,6 +1459,9 @@ function renderAgenda(){
       const left=dailiesLeft();
       noteHtml=`<div class="note">${left.length?'Dailies left: '+left.map(esc).join(' · '):'<span style="color:var(--teal)">Dailies done ✓</span>'}</div>`;
     } else if(t&&t._how){ noteHtml=`<div class="note">${esc(t._how)}</div>`; }
+    if(s.plan){ const ps=planSlotById(s.id); if(ps){ const st=stepState(k,s.id), n=ps.slot.steps.filter((_,i)=>st[i]).length, tot=ps.slot.steps.length;
+      if(ps.slot.exp) noteHtml+=`<div class="note">${esc(ps.slot.exp)}</div>`;
+      if(tot&&s.sec!=='break') noteHtml+=`<div class="note psteps">${n?n+' / '+tot+' steps · ':tot+(tot>1?' steps':' step')+' · '}tap for step-by-step</div>`; } }
     if(s.trimmed) noteHtml+=s.trimStudy?`<div class="note" style="color:var(--teal)">↳ shares time with “${esc(s.trimmed)}”</div>`:`<div class="note" style="color:var(--amber)">✂ trimmed — gave time to “${esc(s.trimmed)}”</div>`;
     if(s.pinned) noteHtml+=`<div class="note" style="color:var(--blue)">📌 pinned to this time</div>`;
     if(s.via==='study') noteHtml+=`<div class="note" style="color:var(--teal)">inside your study block</div>`;
@@ -1240,7 +1492,7 @@ function renderMocks(){
   if(!scored.length){ track.innerHTML='<div style="font-size:12.5px;color:var(--mut)">Log a mock with section scores and your <b style="color:var(--tx)">mark trend</b> builds here — the number that actually moves your percentile.</div>'; }
   else { track.innerHTML=scored.map(x=>{const w=Math.max(2,Math.min(100,Math.round(x.score/x.maxMarks*100)));return `<div style="display:flex;align-items:center;gap:10px;margin-bottom:7px"><span class="mono" style="color:var(--dim);font-size:11px;width:64px">${shortDate(x.date)}</span><div style="flex:1;height:9px;background:var(--surf2);border-radius:6px;overflow:hidden"><div style="height:100%;width:${w}%;background:linear-gradient(90deg,var(--amber),var(--teal))"></div></div><span class="mono" style="font-size:12px;width:54px;text-align:right">${x.score}/${x.maxMarks}</span></div>`;}).join(''); }
   renderAccMatrix(m);
-  document.getElementById('mockProto').innerHTML=`<div class="row"><span class="pill qa">D0</span><div style="flex:1">Sit at the real slot time. No pausing. Note time per section as you go.</div></div><div class="row"><span class="pill varc">D+1</span><div style="flex:1"><b>Full analysis:</b> every wrong answer, every skipped-but-doable Q, every Q over 2 min. Re-solve cleanly. Use CL video solutions where stuck.</div></div><div class="row"><span class="pill dilr">LOG</span><div style="flex:1">One line each in your notebook: <i>what tripped me</i> + <i>right first move</i> + error type (gap / silly / trap / time-sink).</div></div><div class="row"><span class="pill gen">RULE</span><div style="flex:1">Accuracy before attempts. A section under ~80% accuracy means attempt <i>fewer</i>, not more.</div></div>`;
+  document.getElementById('mockProto').innerHTML=`<details class="proto"><summary>DILR in the exam (and every mock)</summary><ol><li>Scan, 5 minutes max. For each set: FATE ticks on paper, count unknowns against relations, read the question stems. Unsure? Try to fix one fact in 90 seconds.</li><li>Order: sets with a forced starting point first, long-but-determined sets next, open-ended sets last.</li><li>Limits: 13 minutes per set, 3 minutes per question.</li><li>While solving: write every comparison as an equation, check totals immediately, never overwrite a cell, box finished scenarios.</li><li>After placing what’s forced, name the open choices. Test each against the most demanding condition.</li><li>Before answering: tick off every condition, and check your answers against each other.</li><li>TITA: always enter an answer. MCQ: only when decided or checkable.</li></ol></details><details class="proto"><summary>When you panic: “too many possibilities”</summary><ol><li>Stop. Write every option on paper, side by side.</li><li>Find one condition you haven’t used yet.</li><li>Test each option against it, one line each. Strike out what fails.</li><li>If none fail, keep them all and move on. Open options are allowed.</li><li>Three minutes with nothing fixed: take what you can and leave the set.</li></ol></details><details class="proto"><summary>VARC in the exam</summary><ol><li>RCs first, then TITAs. Skip MCQ-type VA.</li><li>Paraphrase each paragraph in one plain line as you read.</li><li>For each answer, go back to the line that decides it before choosing.</li><li>TITAs: paraphrase each sentence, then link by what each refers back to.</li></ol></details><details class="proto"><summary>QA in the exam</summary><ol><li>3-minute scan: mark in-pool questions (arithmetic, algebra, progressions, and anything whose tools are in-pool).</li><li>4-minute cap per question. Stuck? Mark it and move.</li><li>Use the options: plug in, estimate, check plausibility.</li><li>Last 2–3 minutes: check signs, zeros and units on answered questions.</li></ol></details><details class="proto"><summary>Mock analysis checklist</summary><ol><li>VARC: deciding line + leak tag for every wrong answer.</li><li>DILR: scan ranking vs result; every error tagged (selection, reading, method, calculation, knowledge, time sink); one “When X, do Y” line per new mistake.</li><li>QA: every question tagged (skipped on reading, abandoned, never reached, wrong); wrong ones logged in Errors.</li><li>Log the mock above.</li><li>One thing to do differently next mock.</li></ol></details>`;
   document.getElementById('mockHist').innerHTML=`<div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:8px">History</div>`+m.slice().reverse().map(x=>{const sc=x.score!=null?`<span class="pill ok">${x.score}${x.maxMarks?'/'+x.maxMarks:''}</span>`:(x.pct!=null?`<span class="pill ok">${x.pct} %ile</span>`:'');return `<div class="row"><div style="flex:1"><b class="mono">${shortDate(x.date)}</b> ${x.att?'· '+esc(x.att):''}${x.skips?` · ${x.skips} fast skips`:''}${x.pct!=null&&x.score!=null?` · ${x.pct} %ile`:''}</div>${sc}</div>`;}).join('');
   renderSectionals();
 }
@@ -1547,14 +1799,26 @@ window.fillFreeSlot=async(k,s,e)=>{
   S.tasks.push(t); closeSheet(); await commit();
   toast(`Added "${esc(title)}" · ${fmt12(s)}–${fmt12(s+dur)}.`);
 };
+let LAST_BS=null;
+window.togglePlanStep=async(id,k,i)=>{
+  const ov=S.overrides[k]=S.overrides[k]||{}; ov.steps=ov.steps||{}; const st=ov.steps[id]=ov.steps[id]||{}; st[i]=!st[i];
+  const ps=planSlotById(id);
+  if(ps&&ps.slot.steps.every((_,j)=>st[j])){ ov.done=ov.done||{}; ov.done[id]=true; if(ov.missed)delete ov.missed[id]; if(ov.miss)delete ov.miss[id]; }
+  const card=document.getElementById('sheetCard'), y=card?card.scrollTop:0;
+  await saveRaw(); renderAll();
+  if(LAST_BS){ openBlockSheet(...LAST_BS); if(card) card.scrollTop=y; }
+};
 window.openBlockSheet=(id,k,label,kind,s,e)=>{
+  LAST_BS=[id,k,label,kind,s,e];
   const ov=S.overrides[k]||{}, done=ov.done&&ov.done[id], skipped=ov.skip&&ov.skip[id];
+  const ps=planSlotById(id); let stepsHtml='';
+  if(ps&&ps.slot.steps.length){ const st=stepState(k,id); stepsHtml=`<div class="psheet">${ps.slot.exp?`<div class="pexp">${esc(ps.slot.exp)}</div>`:''}${ps.slot.steps.map((t,i)=>`<button class="pstep${st[i]?' on':''}" onclick="togglePlanStep('${id}','${k}',${i})"><span class="box">✓</span><span class="n">${i+1}</span><span class="ct">${esc(t)}</span></button>`).join('')}</div>`; }
   const movable=(kind==='gym'||kind==='cat');
   let opts=`<button class="opt" onclick="markBlock('${id}','${k}',${!done},'${kind}',${e-s})"><span>${done?'↩️':'✅'}</span>${done?'Unmark done':'Mark done'}</button>`;
   opts+=`<button class="opt" onclick="skipBlock('${id}','${k}',${!skipped})"><span>${skipped?'↩️':(id==='work'?'🏖️':'⏭️')}</span>${skipped?(id==='work'?'Cancel leave (work is back on)':'Un-skip (put it back)'):(id==='work'?'On leave — free these work hours for tasks':'Skip today — free this time for tasks')}</button>`;
   if(movable) opts+=`<button class="opt" onclick="openTimeSheet('${id}','${k}','${esc(label)}','${kind}',${s},${e})"><span>⏰</span>Change today’s time</button>`;
   if(movable) opts+=`<button class="opt" onclick="openMoveSheet('${id}','${k}','${esc(label)}','${kind}',${s},${e})"><span>📅</span>Move to another day this week</button>`;
-  openSheet(`<h4>${esc(label)}</h4><div class="sub">${fmt12(s)}–${fmt12(e)} · ${DAYNAMES[parseLocal(k+'T00:00').getDay()]}</div>${opts}<button class="opt" style="justify-content:center;border-color:var(--line);color:var(--mut)" onclick="closeSheet()">Close</button>`);
+  openSheet(`<h4>${esc(label)}</h4><div class="sub">${ps?esc(ps.slot.tag)+' · ':''}${fmt12(s)}–${fmt12(e)} · ${e-s} min · ${DAYNAMES[parseLocal(k+'T00:00').getDay()]}</div>${stepsHtml}${opts}<button class="opt" style="justify-content:center;border-color:var(--line);color:var(--mut)" onclick="closeSheet()">Close</button>`);
 };
 /* retroactive verdict on a past block — no time limit, available forever */
 window.confirmBlock=async(id,k,didIt,kind,mins)=>{
